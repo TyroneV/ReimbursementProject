@@ -17,7 +17,7 @@ public class ReimbursementDas implements ReimbursementDao {
 
     @Override
     public Reimbursement createReimbursement(Reimbursement reimbursement) {
-        String sql = String.format("insert into ers_reimbursement \n" +
+        String sql = String.format("insert into dbr.ers_reimbursement \n" +
                 "(reimb_amount ,reimb_description,reimb_author_id,reimb_status_id,reimb_type_id)\n" +
                 "values\n" +
                 "(?,?,?,?,?) \n" +
@@ -48,6 +48,7 @@ public class ReimbursementDas implements ReimbursementDao {
             }
         }catch (Exception e){
             e.printStackTrace();
+            reimbursement = null;
         }
         if(reimbursement != null) {
             u = userDao.getUserById(u);
@@ -62,7 +63,7 @@ public class ReimbursementDas implements ReimbursementDao {
 
     @Override
     public List<Reimbursement> getAllReimbursement() {
-            String sql = String.format("select * from ers_reimbursement");
+            String sql = String.format("select * from dbr.ers_reimbursement order by reimb_id;");
         List<Reimbursement> reimbursementList = new ArrayList<>();
         try(Connection connection = ConnectionUtil.getConnection();
             PreparedStatement ps = connection.prepareStatement(sql)){
@@ -91,13 +92,14 @@ public class ReimbursementDas implements ReimbursementDao {
             }
         }catch (Exception e){
             e.printStackTrace();
+            reimbursementList = null;
         }
         return completeReimbursementList(reimbursementList);
     }
 
     @Override
     public List<Reimbursement> getAllReimbursementStatus(ReimbursementStatus status) {
-        String sql = String.format("select * from ers_reimbursement where reimb_status_id = ?;");
+        String sql = String.format("select * from dbr.ers_reimbursement where reimb_status_id = ? order by reimb_id;");
         List<Reimbursement> reimbursementList = new ArrayList<>();
         try(Connection connection = ConnectionUtil.getConnection();
             PreparedStatement ps = connection.prepareStatement(sql)){
@@ -127,13 +129,14 @@ public class ReimbursementDas implements ReimbursementDao {
             }
         }catch (Exception e){
             e.printStackTrace();
+            reimbursementList = null;
         }
         return completeReimbursementList(reimbursementList);
     }
 
     @Override
     public List<Reimbursement> getAllReimbursementUser(User user) {
-        String sql = String.format("select * from ers_reimbursement where reimb_author_id = ? ");
+        String sql = String.format("select * from dbr.ers_reimbursement where reimb_author_id = ? order by reimb_id;");
         List<Reimbursement> reimbursementList = new ArrayList<>();
         try(Connection connection = ConnectionUtil.getConnection();
             PreparedStatement ps = connection.prepareStatement(sql)){
@@ -163,6 +166,7 @@ public class ReimbursementDas implements ReimbursementDao {
             }
         }catch (Exception e){
             e.printStackTrace();
+            reimbursementList = null;
         }
         return completeReimbursementList(reimbursementList);
     }
@@ -174,7 +178,7 @@ public class ReimbursementDas implements ReimbursementDao {
 
     @Override
     public Reimbursement updateReimbursement(Reimbursement reimbursement) {
-        String sql = String.format("update ers_reimbursement set reimb_resolved = localtimestamp " +
+        String sql = String.format("update dbr.ers_reimbursement set reimb_resolved = localtimestamp " +
                 ",reimb_resolver_id = ?, reimb_status_id = ? where reimb_id = ? \n" +
                 "returning reimb_id,reimb_amount,reimb_submitted,reimb_resolved ," +
                 "reimb_description,reimb_author_id,reimb_resolver_id,reimb_status_id,reimb_type_id;");
@@ -206,6 +210,7 @@ public class ReimbursementDas implements ReimbursementDao {
             }
         }catch (Exception e){
             e.printStackTrace();
+            reimbursement = null;
         }
         return completeReimbursement(reimbursement);
     }
@@ -216,25 +221,29 @@ public class ReimbursementDas implements ReimbursementDao {
     }
 
     private List<Reimbursement> completeReimbursementList(List<Reimbursement> reimbursementList){
-        for (int i = 0; i < reimbursementList.size(); i++){
-            reimbursementList.set(i,completeReimbursement(reimbursementList.get(i)));
+        if(reimbursementList!=null) {
+            for (int i = 0; i < reimbursementList.size(); i++) {
+                reimbursementList.set(i, completeReimbursement(reimbursementList.get(i)));
+            }
         }
         return reimbursementList;
     }
 
     private Reimbursement completeReimbursement(Reimbursement reimbursement){
-        reimbursement.setAuthor(
-                userDao.getUserById(reimbursement.getAuthor())
-        );
-        reimbursement.setResolver(
-                userDao.getUserById(reimbursement.getResolver())
-        );
-        reimbursement.setType(
-                reimbursementTypeDao.getById(reimbursement.getType().getId())
-        );
-        reimbursement.setStatus(
-                reimbursementStatusDao.getById(reimbursement.getStatus().getId())
-        );
+        if(reimbursement != null) {
+            reimbursement.setAuthor(
+                    userDao.getUserById(reimbursement.getAuthor())
+            );
+            reimbursement.setResolver(
+                    userDao.getUserById(reimbursement.getResolver())
+            );
+            reimbursement.setType(
+                    reimbursementTypeDao.getById(reimbursement.getType().getId())
+            );
+            reimbursement.setStatus(
+                    reimbursementStatusDao.getById(reimbursement.getStatus().getId())
+            );
+        }
         return reimbursement;
     }
 }

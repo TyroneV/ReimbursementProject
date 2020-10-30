@@ -13,7 +13,7 @@ public class ReimbursementStatusDas implements ReimbursementStatusDao {
     public ReimbursementStatus getByName(String name) {
         ReimbursementStatus reimbursementStatus = new ReimbursementStatus();
         String sql = String.format("select reimb_status_id ,reimb_status " +
-                "from ers_reimbursment_status ers where reimb_status = ?;");
+                "from dbr.ers_reimbursment_status ers where reimb_status = ?;");
         try(Connection connection = ConnectionUtil.getConnection();
             PreparedStatement ps = connection.prepareStatement(sql)){
             ps.setString(1,name);
@@ -26,6 +26,7 @@ public class ReimbursementStatusDas implements ReimbursementStatusDao {
             }
         }catch (Exception e){
             e.printStackTrace();
+            reimbursementStatus = null;
         }
         return reimbursementStatus;
     }
@@ -34,7 +35,7 @@ public class ReimbursementStatusDas implements ReimbursementStatusDao {
     public ReimbursementStatus getById(int id) {
         ReimbursementStatus reimbursementStatus = new ReimbursementStatus();
         String sql = String.format("select reimb_status_id ,reimb_status " +
-                "from ers_reimbursment_status ers where reimb_status_id = ?;");
+                "from dbr.ers_reimbursment_status ers where reimb_status_id = ?;");
         try(Connection connection = ConnectionUtil.getConnection();
             PreparedStatement ps = connection.prepareStatement(sql)){
             ps.setInt(1,id);
@@ -47,6 +48,7 @@ public class ReimbursementStatusDas implements ReimbursementStatusDao {
             }
         }catch (Exception e){
             e.printStackTrace();
+            reimbursementStatus = null;
         }
         return reimbursementStatus;
     }

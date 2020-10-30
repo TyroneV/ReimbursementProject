@@ -13,7 +13,7 @@ public class ReimbursementTypeDas implements ReimbursementTypeDao {
     public ReimbursementType getByName(String name) {
         ReimbursementType reimbursementType = new ReimbursementType();
         String sql = String.format("select reimb_type_id ,reimb_type " +
-                "from ers_reimbursment_type ert where reimb_type = ?;");
+                "from dbr.ers_reimbursment_type ert where reimb_type = ?;");
         try(Connection connection = ConnectionUtil.getConnection();
             PreparedStatement ps = connection.prepareStatement(sql)){
             ps.setString(1,name);
@@ -26,6 +26,7 @@ public class ReimbursementTypeDas implements ReimbursementTypeDao {
             }
         }catch (Exception e){
             e.printStackTrace();
+            reimbursementType = null;
         }
         return reimbursementType;
     }
@@ -34,7 +35,7 @@ public class ReimbursementTypeDas implements ReimbursementTypeDao {
     public ReimbursementType getById(int id) {
         ReimbursementType reimbursementType = new ReimbursementType();
         String sql = String.format("select reimb_type_id ,reimb_type " +
-                "from ers_reimbursment_type ert where reimb_type_id = ?;");
+                "from dbr.ers_reimbursment_type ert where reimb_type_id = ?;");
         try(Connection connection = ConnectionUtil.getConnection();
             PreparedStatement ps = connection.prepareStatement(sql)){
             ps.setInt(1,id);
@@ -47,6 +48,7 @@ public class ReimbursementTypeDas implements ReimbursementTypeDao {
             }
         }catch (Exception e){
             e.printStackTrace();
+            reimbursementType = null;
         }
         return reimbursementType;
     }

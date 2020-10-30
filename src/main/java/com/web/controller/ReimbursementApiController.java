@@ -16,7 +16,7 @@ public class ReimbursementApiController {
     private final ReimbursementService rs = new ReimbursementService();
 
     public void pastTickets(HttpServletRequest req, HttpServletResponse resp) throws IOException {
-        if(req.getMethod().toLowerCase().equals("get") &&
+        if(req.getMethod().toLowerCase().equals("get") &&  sc.getSessionUser(req) != null &&
                 sc.getSessionUser(req).getUserRole().getRole().equals("Employee")) {
             resp.setContentType("text/json");
             try {
@@ -37,7 +37,7 @@ public class ReimbursementApiController {
             Reimbursement reimbursement =
                     new ObjectMapper().readValue(req.getInputStream(), Reimbursement.class);
             try {
-                if(sc.getSessionUser(req) != null &&
+                if(sc.getSessionUser(req) != null && sc.getSessionUser(req) != null &&
                         sc.getSessionUser(req).getUserRole().getRole().equals("Employee")) {
                     reimbursement.setAuthor(sc.getSessionUser(req));
                     resp.getWriter().println(rs.addRequest(reimbursement));
@@ -56,7 +56,7 @@ public class ReimbursementApiController {
         if(req.getMethod().toLowerCase().equals("get")) {
             resp.setContentType("text/json");
             try {
-                if(sc.getSessionUser(req) != null &&
+                if(sc.getSessionUser(req) != null && sc.getSessionUser(req) != null &&
                         sc.getSessionUser(req).getUserRole().getRole().equals("Finance Manager")) {
                     resp.getWriter().println(rs.getAllReimbursement());
                 }else {
@@ -74,7 +74,7 @@ public class ReimbursementApiController {
         if(req.getMethod().toLowerCase().equals("get")) {
             resp.setContentType("text/json");
             try {
-                if(sc.getSessionUser(req) != null &&
+                if(sc.getSessionUser(req) != null && sc.getSessionUser(req) != null &&
                         sc.getSessionUser(req).getUserRole().getRole().equals("Finance Manager") &&
                         req.getParameter("status") != null) {
                     ReimbursementStatus status = new ReimbursementStatus();
@@ -95,7 +95,7 @@ public class ReimbursementApiController {
         if(req.getMethod().toLowerCase().equals("post")) {
             resp.setContentType("text/json");
             try {
-                if(sc.getSessionUser(req) != null &&
+                if(sc.getSessionUser(req) != null && sc.getSessionUser(req) != null &&
                         sc.getSessionUser(req).getUserRole().getRole().equals("Finance Manager")) {
                     Reimbursement reimbursement =
                             new ObjectMapper().readValue(req.getInputStream(), Reimbursement.class);

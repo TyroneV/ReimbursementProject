@@ -13,7 +13,7 @@ public class UserRoleDas implements UserRoleDao {
     public UserRole getByName(String name) {
         UserRole role = new UserRole();
         String sql = String.format("select ers_user_role_id," +
-                "ers_role from ers_reimbursment_roles where ers_role = ?");
+                "ers_role from dbr.ers_reimbursment_roles where ers_role = ?");
             try(Connection connection = ConnectionUtil.getConnection();
                 PreparedStatement ps = connection.prepareStatement(sql)){
                 ps.setString(1,name);
@@ -26,6 +26,7 @@ public class UserRoleDas implements UserRoleDao {
                 }
             }catch (Exception e){
                 e.printStackTrace();
+                role = null;
             }
         return role;
     }
@@ -34,7 +35,7 @@ public class UserRoleDas implements UserRoleDao {
     public UserRole getById(int id) {
         UserRole role = new UserRole();
         String sql = String.format("select ers_user_role_id," +
-                "ers_role from ers_reimbursment_roles where ers_user_role_id = ?");
+                "ers_role from dbr.ers_reimbursment_roles where ers_user_role_id = ?");
         try(Connection connection = ConnectionUtil.getConnection();
             PreparedStatement ps = connection.prepareStatement(sql)){
             ps.setInt(1,id);
@@ -47,6 +48,7 @@ public class UserRoleDas implements UserRoleDao {
             }
         }catch (Exception e){
             e.printStackTrace();
+            role = null;
         }
         return role;
     }

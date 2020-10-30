@@ -17,7 +17,7 @@ public class UserDas implements UserDao{
     @Override
     public User createUser(User user) {
 
-        String sql = String.format("insert into ers_users" +
+        String sql = String.format("insert into dbr.ers_users" +
                 "(ers_username,ers_password,user_first_name,user_last_name,user_email,user_role_id)\n" +
                 "values " +
                 "(?,?,?,?,?,?)" +
@@ -38,6 +38,7 @@ public class UserDas implements UserDao{
             }
         }catch (SQLException e){
             e.printStackTrace();
+            user = null;
         }
         return user;
     }
@@ -46,7 +47,7 @@ public class UserDas implements UserDao{
     public List<User> getAllUsers() {
 
         List<User> userList = new ArrayList<>();
-        String sql = String.format("select * from usertable;");
+        String sql = String.format("select * from dbr.usertable;");
         try(Connection connection = ConnectionUtil.getConnection();
             PreparedStatement ps = connection.prepareStatement(sql)) {
             ResultSet resultSet = ps.executeQuery();
@@ -63,13 +64,14 @@ public class UserDas implements UserDao{
             }
         }catch (SQLException e){
             e.printStackTrace();
+            userList = null;
         }
         return userList;
     }
 
     @Override
     public User getUserById(User user) {
-        String sql = String.format("select * from usertable where id = ?;");
+        String sql = String.format("select * from dbr.usertable where id = ?;");
         try(Connection connection = ConnectionUtil.getConnection();
             PreparedStatement ps = connection.prepareStatement(sql)) {
             ps.setInt(1,user.getId());
@@ -87,13 +89,14 @@ public class UserDas implements UserDao{
             }
         }catch (SQLException e){
             e.printStackTrace();
+            user = null;
         }
         return user;
     }
 
     @Override
     public User getUserByUsername(User user) {
-        String sql = String.format("select * from usertable where username = ?;");
+        String sql = String.format("select * from dbr.usertable where username = ?;");
         try(Connection connection = ConnectionUtil.getConnection();
             PreparedStatement ps = connection.prepareStatement(sql)) {
             ps.setString(1,user.getUsername());
@@ -111,13 +114,14 @@ public class UserDas implements UserDao{
             }
         }catch (SQLException e){
             e.printStackTrace();
+            user = null;
         }
         return user;
     }
 
     @Override
     public User getUserByUsernameAndPassword(User user) {
-        String sql = String.format("select * from usertable where username = ? and password = ?;");
+        String sql = String.format("select * from dbr.usertable where username = ? and password = ?;");
         try(Connection connection = ConnectionUtil.getConnection();
             PreparedStatement ps = connection.prepareStatement(sql)) {
             ps.setString(1,user.getUsername());
@@ -136,6 +140,7 @@ public class UserDas implements UserDao{
             }
         }catch (SQLException e){
             e.printStackTrace();
+            user = null;
         }
         return user;
     }

@@ -11,7 +11,8 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 public class RequestHandler {
-    public void processRequest(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+
+    public void data(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         UserApiController userApiController = new UserApiController();
         ReimbursementApiController reimbursementApiController = new ReimbursementApiController();
 
@@ -21,39 +22,48 @@ public class RequestHandler {
         Matcher m = p.matcher(uri);
         uri = m.replaceAll("");
         switch (uri){
-            case "/login":
-                System.out.println("login");
-                break;
-            case "/api/login":
+            case "/api/login.json":
                 userApiController.login(req,resp);
                 break;
-            case "/api/logout":
+            case "/api/logout.json":
                 userApiController.logout(req,resp);
                 break;
-            case "/api/users":
+            case "/api/users.json":
                 userApiController.getAllUser(req,resp);
                 break;
-            case "/api/register":
+            case "/api/register.json":
                 userApiController.createUser(req,resp);
                 break;
-            case "/api/ticket/add":
+            case "/api/ticket/add.json":
                 reimbursementApiController.newTicket(req,resp);
                 break;
-            case "/api/ticket/past":
+            case "/api/ticket/past.json":
                 reimbursementApiController.pastTickets(req,resp);
                 break;
-            case "/api/ticket/all":
+            case "/api/ticket/all.json":
                 reimbursementApiController.getAllTickets(req,resp);
                 break;
-            case "/api/ticket/filter":
+            case "/api/ticket/filter.json":
                 reimbursementApiController.filteredTickets(req,resp);
                 break;
-            case "/api/ticket/update":
+            case "/api/ticket/update.json":
                 reimbursementApiController.updateTicket(req,resp);
                 break;
+        }
+    }
+
+    public String routes(HttpServletRequest req) {
+        String uri = req.getRequestURI();
+        String regex = "/reimbursement";
+        Pattern p = Pattern.compile(regex);
+        Matcher m = p.matcher(uri);
+        uri = m.replaceAll("");
+
+        switch (uri){
+            case  "/home.page" :
+
             default:
-                System.out.println("Home");
-                break;
+                return "html/index.html";
         }
     }
 }

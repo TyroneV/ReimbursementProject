@@ -47,9 +47,6 @@ public class UserApiController {
                 sc.setSession(req,user);
                 System.out.println("Login Successful");
             }
-            else if(sc.getSessionUser(req) != null){
-                System.out.println("Already logged in!");
-            }
             else {
                 resp.sendError(406, "Unable to Login");
             }
