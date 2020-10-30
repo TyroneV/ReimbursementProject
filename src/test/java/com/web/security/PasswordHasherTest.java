@@ -1,8 +1,9 @@
 package com.web.security;
 
-import org.junit.Test;
 
-import static junit.framework.TestCase.assertTrue;
+import org.junit.jupiter.api.Test;
+
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
 class PasswordHasherTest {
 
@@ -11,6 +12,6 @@ class PasswordHasherTest {
         String pass = "password";
         String hashed = PasswordHasher.generateHash(pass);
         String pass2 = PasswordHasher.getHashed(pass,hashed);
-        assertTrue(hashed == pass2);
+        assertTrue(hashed.equals(pass2),"Password Hashing is working");
     }
 }
