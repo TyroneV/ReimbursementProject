@@ -189,6 +189,7 @@ async function fetchTableData(filterV = 0) {
     if (userTable.ok) {
       const json = await userTable.json();
       renderTable(false, json, filterV);
+      ticketForm();
     }
   } catch (e) {
     console.log(e);

@@ -3,11 +3,10 @@ const userInfo = document.getElementById("userInfo");
 const container = document.getElementById("container");
 const ul = document.getElementById("navbarUl");
 
-
 if (getSession()) {
   loggedIn();
-}else{
-    logout();
+} else {
+  logout();
 }
 
 function reactBootleg() {
@@ -65,21 +64,16 @@ function reactBootleg() {
       "            <br>\n" +
       '            <button type="submit" class="btn btn-secondary" id="submitReg">Submit</button>\n' +
       "        </form>\n";
-      document.getElementById("registerForm").addEventListener("submit", register);
+    document
+      .getElementById("registerForm")
+      .addEventListener("submit", register);
   } else if (getSession()) {
     if (uri != "/reimbursement/home.page") {
       window.location.pathname = "/reimbursement/home.page";
     }
     container.innerHTML = "";
     fetchTableData();
-    ticketForm();
   }
 }
 
 reactBootleg();
-
-
-
-
-
-
