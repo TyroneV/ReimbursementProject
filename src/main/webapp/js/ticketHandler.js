@@ -1,4 +1,6 @@
 function ticketForm() {
+  const con = document.getElementById("container");
+  con.innerHTML = "";
   const br = document.createElement("br");
   const form = document.createElement("form");
   form.className = "form-group";
@@ -53,7 +55,7 @@ function ticketForm() {
   div3.append(label3, input3);
   div4.append(submitBtn);
   form.append(br, div1, div2, div3, div4);
-  container.append(form);
+  con.append(form);
   form.addEventListener("submit", submitReim);
 }
 

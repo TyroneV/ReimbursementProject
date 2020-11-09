@@ -11,6 +11,8 @@ public class ConnectionUtil {
     private static final String USERNAME = System.getenv("DB_USERNAME");
     private static final String PASSWORD = System.getenv("DB_PASSWORD");
 
+
+
     public static Connection getConnection() throws SQLException {
         try {
             Class.forName("org.postgresql.Driver");
