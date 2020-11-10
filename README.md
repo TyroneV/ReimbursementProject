@@ -50,16 +50,16 @@ Run the application and go to the homepage URL.
 Create an account for both employee and financemanager
   
   #### Registration page
-  <img src="https://raw.githubusercontent.com/TyroneV/ReimbursementProject/dev/src/main/resources/registerpage.png"/>
+  <img src="https://raw.githubusercontent.com/TyroneV/ReimbursementProject/master/src/main/resources/registerpage.png"/>
   
 Login to either account and you are able to do what each type of account can do base on the user story provided at the top of the readme
   
   #### Login page
-   <img src="https://raw.githubusercontent.com/TyroneV/ReimbursementProject/dev/src/main/resources/loginpage.png"/>
+   <img src="https://raw.githubusercontent.com/TyroneV/ReimbursementProject/master/src/main/resources/loginpage.png"/>
    
   #### User page
-  <img src="https://raw.githubusercontent.com/TyroneV/ReimbursementProject/dev/src/main/resources/userpage.png"/>
+  <img src="https://raw.githubusercontent.com/TyroneV/ReimbursementProject/master/src/main/resources/userpage.png"/>
   
   #### Admin page
-  <img src="https://raw.githubusercontent.com/TyroneV/ReimbursementProject/dev/src/main/resources/adminpage.png"/>
+  <img src="https://raw.githubusercontent.com/TyroneV/ReimbursementProject/master/src/main/resources/adminpage.png"/>
 
