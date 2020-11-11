@@ -1,7 +1,21 @@
 # Reimbursement Project
+ 
+## Project Description
+ 
 Reimbursement Web Application made using Tomcat/Java and Html/JavaScript for the front end pages
 
-## User Stories
+## Technologies Used
+
+* Java
+* JavaScript 
+* HTML
+* CSS
+* AJAX
+* PostgreSQL, SQL
+* Servlets
+* JDBC
+
+## Features
  <h5>As a Employee User</h5>
   <ul>
     <li>Register and login</li>
@@ -14,7 +28,7 @@ Reimbursement Web Application made using Tomcat/Java and Html/JavaScript for the
     <li>Accept or Deny Reimbursements</li>
     <li>See all Reimbursements</li>
   </ul>
-  
+
 ## Installation
 
 <ol>
@@ -46,20 +60,29 @@ Reimbursement Web Application made using Tomcat/Java and Html/JavaScript for the
 </ol>
 
 ## Usage
+
 Run the application and go to the homepage URL.
 Create an account for both employee and financemanager
   
-  #### Registration page
-  <img src="https://raw.githubusercontent.com/TyroneV/ReimbursementProject/master/src/main/resources/registerpage.png"/>
-  
+#### Registration page
+
+<img src="https://raw.githubusercontent.com/TyroneV/ReimbursementProject/master/src/main/resources/registerpage.png"/>
+
 Login to either account and you are able to do what each type of account can do base on the user story provided at the top of the readme
-  
-  #### Login page
-   <img src="https://raw.githubusercontent.com/TyroneV/ReimbursementProject/master/src/main/resources/loginpage.png"/>
-   
-  #### User page
-  <img src="https://raw.githubusercontent.com/TyroneV/ReimbursementProject/master/src/main/resources/userpage.png"/>
-  
-  #### Admin page
-  <img src="https://raw.githubusercontent.com/TyroneV/ReimbursementProject/master/src/main/resources/adminpage.png"/>
+
+#### Login page
+
+<img src="https://raw.githubusercontent.com/TyroneV/ReimbursementProject/master/src/main/resources/loginpage.png"/>
+
+#### User page
+
+<img src="https://raw.githubusercontent.com/TyroneV/ReimbursementProject/master/src/main/resources/userpage.png"/>
+
+#### Admin page
+
+<img src="https://raw.githubusercontent.com/TyroneV/ReimbursementProject/master/src/main/resources/adminpage.png"/>
+
+## Contributors
+
+> Tyrone Veneracion
 
